@@ -23,7 +23,7 @@
   <meta name="twitter:image" content="https://autogen.top/imgs/logo.png">
   
   <!-- 파비콘 -->
-  <link rel="icon" type="image/x-icon" href="https://autogen.top/imgs/favicon.ico">
+  <link rel="icon" type="image/png" href="./imgs/logo.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://autogen.top/imgs/apple-touch-icon.png">
   
   <!-- 캐노니컬 URL -->
@@ -93,7 +93,6 @@
       padding: 2rem;
     }
   
-    /* 이미지 위에 어두운 오버레이 효과를 주기 위한 가상 요소 */
     .header::after {
       content: '';
       position: absolute;
@@ -101,11 +100,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(26, 26, 26, 0.7); /* 어두운 오버레이 */
+      background: rgba(26, 26, 26, 0.7);
       z-index: -1;
     }
   
-    /* 기존의 header::before 스타일은 제거하거나 다음과 같이 수정 */
     .header::before {
       content: '';
       position: absolute;
@@ -122,7 +120,7 @@
     }
   
     .logo {
-      font-size: 5rem;  /* 5em에서 변경 */
+      font-size: 5rem;
       letter-spacing: 1rem;
       margin-bottom: 1.25rem;
       padding: 2.5rem;
@@ -218,8 +216,8 @@
       }
 
       .nav .menu-icon {
-        margin-left: auto;  /* 추가: 우측 정렬 보장 */
-        width: auto;  /* 수정: 100%에서 auto로 */
+        margin-left: auto;
+        width: auto;
         padding: 15px;
       }
 
@@ -261,7 +259,6 @@
         opacity: 1;
       }
 
-      /* 각 메뉴 아이템별 지연 시간 설정 */
       .nav ul li:nth-child(1) { transition-delay: 0.1s; }
       .nav ul li:nth-child(2) { transition-delay: 0.15s; }
       .nav ul li:nth-child(3) { transition-delay: 0.2s; }
@@ -328,7 +325,7 @@
       opacity: 0;
       visibility: hidden;
       border-radius: 15px;
-      overflow: visible; /* hidden에서 visible로 변경 */
+      overflow: visible;
     }
   
     .video-description {
@@ -495,10 +492,9 @@
       max-width: 1400px;
       margin: 0 auto;
       padding: 0 20px;
-      grid-template-columns: repeat(2, 1fr); /* 기본적으로 2개씩 */
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    /* 데스크톱 화면에서만 4개로 변경 */
     @media (min-width: 1024px) {
         .feature-grid {
             grid-template-columns: repeat(4, 1fr);
@@ -557,18 +553,18 @@
 
     @media (max-width: 768px) {
       .feature-grid {
-        grid-template-columns: 1fr;  /* 한 줄에 하나의 카드만 */
-        gap: 1rem;  /* 카드 간격 줄임 */
-        padding: 0 1rem;  /* 좌우 여백 추가 */
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
       }
     
       .feature-card.expanded {
-        padding-bottom: 1rem;  /* 확장됐을 때 아래 패딩 더 줄임 */
+        padding-bottom: 1rem;
       }
 
       .feature-card .detail-content {
         margin-top: 1rem;
-        font-size: 0.9rem;  /* 상단 여백도 약간 줄임 */
+        font-size: 0.9rem;
       }
     }
   
@@ -658,7 +654,6 @@
       left: 5px;
       right: -5px;
       bottom: -5px;
-      /* border: 1px solid var(--military-red); */
       z-index: -1;
     }
   
@@ -894,24 +889,24 @@
   
     @media (max-width: 768px) {
       .stats-grid {
-        gap: 0.8rem;  /* 간격 줄임 */
+        gap: 0.8rem;
         margin-top: 2rem;
       }
 
       .stat-item {
-        padding: 1rem 0.5rem;  /* 패딩 줄임 */
+        padding: 1rem 0.5rem;
       }
 
       .stat-number {
-        font-size: 1.8rem;  /* 숫자 크기 줄임 */
+        font-size: 1.8rem;
       }
 
       .stat-label {
-        font-size: 0.8rem;  /* 라벨 텍스트 크기 줄임 */
+        font-size: 0.8rem;
       }
 
       .stat-icon svg {
-        width: 24px;  /* 아이콘 크기 줄임 */
+        width: 24px;
         height: 24px;
       }
       
@@ -944,7 +939,6 @@
       z-index: 1;
     }
 
-        /* 두 섹션 사이 구분선 추가 */
     .pricing-section::after {
       content: '';
       position: absolute;
@@ -1053,6 +1047,10 @@
       color: var(--military-accent);
       font-size: 1.2em;
       font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
     }
   
     .price-notice {
@@ -1061,25 +1059,32 @@
       text-align: center;
       font-size: 0.9em;
     }
+    
+    .original-price {
+      text-decoration: line-through;
+      color: #888;
+      font-size: 0.85em;
+      margin-right: 8px;
+    }
   
     @media (max-width: 768px) {
 
       .pricing-section {
-        padding: 3rem 0;  /* 섹션 패딩 줄임 */
+        padding: 3rem 0;
       }
 
       .info-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;  /* 카드 간격 줄임 */
+        gap: 1.5rem;
         margin-top: 0.5rem;
       }
       
       .info-card {
-        padding: 1.5rem;  /* 카드 내부 패딩 줄임 */
+        padding: 1.5rem;
       }
 
       .info-card h3 {
-        font-size: 1.4rem;  /* 제목 크기 줄임 */
+        font-size: 1.4rem;
         margin-bottom: 1rem;
       }
       
@@ -1101,7 +1106,9 @@
       }
 
       .price {
-        font-size: 1.1rem;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
       }
 
       .price-notice {
@@ -1288,7 +1295,6 @@
       height: 40px;  /* 로고 이미지 높이 */
     }
 
-
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   </head>
@@ -1449,10 +1455,10 @@
 
               <strong>AUTOGEN은 서비스 품질과 보안을 유지하기 위해 슬롯제로 운영됩니다.</strong>
               곧 도입되는 강력한 안티치트 시스템, 이지 안티 치트(EAC)에 대응하기 위해 비메모리 계열의 핵이 갖춰야할 최우선 요건은 프로그램의 보안 유지입니다. <br>
-              기존에 존재하던 대다수 메모리 핵들은 EAC에 의해 탐지될 것이며, 모든 프로그램에 대하여 로그를 남기는 EAC의 특성상, 사용 자체를 막을 수 없는 비메모리 핵이라 할지라도 이미 널리 퍼진 프로그램이라면 후속 정지로부터 안전하다 보장할 수 없습니다. <br>
-              이에 오토젠은 최고 수준의 보안성을 확보하기 위해 철저한 회원제를 고수하며, 주기적으로 프로그램의 내부 구조를 업데이트하고 있습니다. 
+              기존에 존재하던 대다수 메모리 핵들은 EAC에 의해 탐지될 것이며, 모든 프로그램에 대하여 로그를 남기는 EAC의 특성상, 사용 자체를 막을 수 없는 비메모리 핵이라 할지라도 광범위하게 유통된 프로그램이라면 후속 정지로부터 안전하다 보장할 수 없습니다. <br>
+              이에 오토젠은 최고 수준의 보안성을 확보하기 위해 철저한 회원제를 고수하며, 정기적으로 프로그램의 내부 구조를 업데이트하고 있습니다. 
               <br>전체 회원 수를 30명으로 제한하고 있기 때문에 회원 모집은 비정기적으로 진행되며, 기존 회원의 탈퇴 시에만 사이트를 오픈하여 추가 모집이 이루어집니다.
-              <br>AUTOGEN의 회원이 되시는 순간부터 전문 개발팀의 24시간 기술 지원이 제공됩니다. 오토젠은 회원분들의 소중한 피드백을 반영한 지속적인 성능 개선과 정기적인 업데이트를 통해 최상의 서비스를 유지하고 있습니다.
+              <br>오토젠의 회원이 되시는 순간부터 전문 개발팀의 24시간 기술 지원이 제공됩니다. 저희는 회원분들의 소중한 피드백을 반영한 지속적인 성능 개선과 정기적인 업데이트를 통해 최상의 서비스를 유지하고 있습니다.
             </p>
           </div>
 
@@ -1523,14 +1529,20 @@
           <div class="price-options">
             <div class="price-item">
               <span class="duration">7일 이용권</span>
-              <span class="price">90,000원</span>
+              <span class="price">
+                <span class="original-price">90,000원</span>
+                70,000원
+              </span>
             </div>
             <div class="price-item">
               <span class="duration">30일 이용권</span>
-              <span class="price">250,000원</span>
+              <span class="price">
+                <span class="original-price">250,000원</span>
+                200,000원
+              </span>
             </div>
           </div>
-          <p class="price-notice">*7일권은 한정판매 중입니다. </p>
+          <p class="price-notice">*기간 한정 특가 진행 중. </p>
         </div>
       </div>
     </div>
