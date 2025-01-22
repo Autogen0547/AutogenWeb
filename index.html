@@ -576,6 +576,7 @@
       pointer-events: none;
       z-index: 9999;
       opacity: 0.8;
+      display: none;
     }
   
     h2 {
@@ -583,19 +584,63 @@
       margin-bottom: 40px;
       text-transform: uppercase;
       letter-spacing: 5px;
-      color: var(--military-accent);
       position: relative;
       display: inline-block;
+      padding: 0 15px;
+      /* 색상 개선 */
+      color: transparent;
+      background: linear-gradient(
+        135deg,
+        var(--military-accent) 0%,
+        #d4b78f 50%,
+        var(--military-accent) 100%
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      /* 입체감 추가 */
+      text-shadow: 
+        2px 2px 3px rgba(0, 0, 0, 0.3),
+        0 0 15px rgba(139, 115, 85, 0.2);
     }
-  
-    h2::after {
+
+    h2::before, h2::after {
       content: '';
       position: absolute;
-      left: -20px;
-      right: -20px;
-      bottom: -10px;
       height: 2px;
-      background: var(--military-red);
+      /* 장식 라인도 그라데이션 적용 */
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--military-accent) 20%,
+        #d4b78f 50%,
+        var(--military-accent) 80%,
+        transparent
+      );
+      opacity: 0.5;
+      transition: all 0.3s ease;
+      /* 글로우 효과 추가 */
+      box-shadow: 0 0 8px rgba(139, 115, 85, 0.3);
+    }
+
+    h2::before {
+      width: 30px;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    h2::after {
+      width: 30px;
+      right: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    /* hover 효과 강화 */
+    h2:hover::before, h2:hover::after {
+      width: 50px;
+      opacity: 1;
+      box-shadow: 0 0 12px rgba(139, 115, 85, 0.5);
     }
 
     @media (max-width: 768px) {
@@ -603,12 +648,21 @@
         font-size: 1.8rem;
         margin-bottom: 2rem;
         letter-spacing: 0.2rem;
+        padding: 0 10px;
+      }
+
+      h2::before {
+        width: 20px;
+        left: -25px;
       }
 
       h2::after {
-        left: -1rem;
-        right: -1rem;
-        bottom: -0.5rem;
+        width: 20px;
+        right: -25px;
+      }
+
+      h2:hover::before, h2:hover::after {
+        width: 30px;
       }
     }
       
@@ -1296,6 +1350,485 @@
       height: 40px;  /* 로고 이미지 높이 */
     }
 
+    .patch-notes {
+      padding: 100px 0;
+      background: rgba(26, 26, 26, 0.95);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .patch-notes::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(transparent 0%, transparent 49%, var(--military-accent) 49%, var(--military-accent) 51%, transparent 51%, transparent 100%),
+        linear-gradient(90deg, transparent 0%, transparent 49%, var(--military-accent) 49%, var(--military-accent) 51%, transparent 51%, transparent 100%);
+      background-size: 50px 50px;
+      opacity: 0.07;
+      animation: gridMove 15s linear infinite;
+    }
+
+    @keyframes gridMove {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 50px 50px;
+      }
+    }
+
+    .patch-container {
+      max-width: 600px;  /* 800px에서 600px로 줄임 */
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .patch-timeline {
+      position: relative;
+      margin-top: 50px;
+      padding-left: 50px;
+    }
+
+    .patch-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        var(--military-accent) 2px,
+        var(--military-accent) 40%,
+        rgba(139, 115, 85, 0.3)
+      );
+    }
+
+    .patch-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 25px 30px;
+      background: rgba(26, 26, 26, 0.8);
+      border: 1px solid var(--military-accent);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
+      max-width: 500px;  /* 600px에서 500px로 줄임 */
+      overflow: visible;  /* 글로우 효과가 잘리지 않도록 */
+    }
+
+    /* 상단 레드 글로우 라인 추가 */
+    .patch-item > div:first-child::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(
+        90deg, 
+        transparent,
+        rgba(255, 50, 50, 0.8) 20%,
+        rgba(255, 50, 50, 0.8) 80%,
+        transparent
+      );
+      box-shadow: 0 0 10px rgba(255, 50, 50, 0.5);
+    }
+
+    .patch-item::before {
+      content: '';
+      position: absolute;
+      left: -50px;
+      top: 20px;
+      width: 16px;
+      height: 16px;
+      background: var(--dark-bg);
+      border: 3px solid var(--military-accent);
+      transform: rotate(45deg);
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .patch-item::after {
+      content: '';
+      position: absolute;
+      left: -32px;
+      top: 27px;
+      width: 30px;
+      height: 2px;
+      background: var(--military-accent);
+      z-index: 0;
+    }
+
+    .patch-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 0 20px rgba(139, 115, 85, 0.2);
+    }
+
+    .patch-item:hover::before {
+      transform: rotate(225deg);
+      background: var(--military-accent);
+    }
+
+    .patch-date {
+      color: var(--military-accent);
+      font-weight: bold;
+      font-size: 1.1em;
+      margin-bottom: 15px;
+    }
+
+    .version-tag {
+      position: absolute;
+      top: 25px;  /* 위치 조정 */
+      right: -2px;
+      background: var(--military-accent);
+      color: #1a1a1a;
+      padding: 5px 15px;
+      font-size: 0.9em;
+      clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    /* NEW 태그 스타일 수정 */
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      left: -12px;  /* right를 left로 변경 */
+      background: var(--military-red);
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 0.7em;
+      border-radius: 3px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+      z-index: 1;
+      /* 그림자 효과 추가로 가시성 향상 */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .new-tag {
+        top: -10px;
+        left: -8px;  /* right를 left로 변경 */
+        padding: 3px 6px;
+        font-size: 0.6em;
+      }
+    }
+
+    .patch-content h3 {
+      color: var(--military-accent);
+      margin: 15px 0;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .patch-content ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .patch-content li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+      color: #d3d3d3;
+      transition: all 0.3s ease;
+    }
+
+    .patch-content li::before {
+      content: '►';
+      position: absolute;
+      left: 0;
+      color: var(--military-accent);
+      font-size: 0.8em;
+      transition: all 0.3s ease;
+    }
+
+    .patch-content li.highlight {
+      color: #98c379;
+      text-shadow: 0 0 10px rgba(152, 195, 121, 0.3);
+    }
+
+    .patch-content li.highlight::before {
+      color: #98c379;
+    }
+
+    .patch-content li:hover::before {
+      transform: translateX(3px);
+    }
+
+    @media (max-width: 768px) {
+      .patch-notes {
+        padding: 3rem 0;
+      }
+
+      .patch-timeline {
+        padding-left: 30px;
+        margin-top: 2rem;
+      }
+
+      .patch-item {
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+
+      .patch-item::before {
+        left: -34px;
+        width: 12px;
+        height: 12px;
+      }
+
+      .patch-item::after {
+        left: -20px;
+        width: 20px;
+      }
+
+      .version-tag {
+        padding: 3px 10px;
+        font-size: 0.8em;
+      }
+
+      .patch-content h3 {
+        font-size: 1.1em;
+        margin: 10px 0;
+      }
+
+      .patch-content li {
+        font-size: 0.9em;
+        margin-bottom: 8px;
+      }
+    }
+
+    .patch-title {
+      position: relative;
+      margin-bottom: 50px;
+      padding-left: 50px;  /* timeline과 같은 위치에 맞춤 */
+    }
+
+    .patch-title h2 {
+      color: rgba(139, 115, 85, 0.6);
+      font-size: 2.2em;  /* 1.8em에서 2.4em으로 키움 */
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin: 0;
+      font-weight: normal;
+      position: relative;  /* 추가 */
+    }
+
+    /* 기존 h2 스타일 상속 방지 */
+    .patch-title h2::before,
+    .patch-title h2::after {
+      display: none;
+    }
+
+    .title-accent {
+      position: absolute;
+      left: 50px;
+      top: 100%;
+      width: 200px;  /* 100px에서 200px로 늘림 */
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        var(--military-accent),
+        transparent
+      );
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .patch-title {
+        padding-left: 30px;
+      }
+      
+      .title-accent {
+        left: 30px;
+        width: 160px;  /* 80px에서 120px로 늘림 */
+      }
+      .patch-title h2 {
+        font-size: 1.8em;  /* 모바일에서는 기존 크기 유지 */
+      }
+    }
+
+    .video-section .video-title {
+      position: relative;
+      margin-bottom: 80px;
+      padding: 30px 60px;
+      background: rgba(26, 26, 26, 0.95);
+      border-left: 4px solid var(--military-accent);
+      transform: skew(-15deg);
+      overflow: visible;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+      width: 600px;  /* 추가: 컨테이너 넓이 제한 */
+      margin-left: auto;  /* 추가: 중앙 정렬을 위해 */
+      margin-right: auto;  /* 추가: 중앙 정렬을 위해 */
+    }
+
+    .video-section .video-title::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        /* 필름 스트립 패턴 */
+        linear-gradient(90deg,
+          transparent 0%,
+          transparent 5%,
+          rgba(139, 115, 85, 0.1) 5%,
+          rgba(139, 115, 85, 0.1) 10%,
+          transparent 10%,
+          transparent 90%,
+          rgba(139, 115, 85, 0.1) 90%,
+          rgba(139, 115, 85, 0.1) 95%,
+          transparent 95%,
+          transparent 100%
+        ),
+        /* 필름 홀 패턴 */
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 15px,
+          rgba(139, 115, 85, 0.15) 15px,
+          rgba(139, 115, 85, 0.15) 20px
+        );
+      z-index: -1;
+    }
+
+    .video-section .video-title::after {
+      content: '//';
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%) skew(15deg);
+      color: var(--military-accent);
+      font-size: 1.5em;
+      opacity: 0.8;
+    }
+
+    .video-section .video-title h2 {
+      transform: skew(15deg);
+      color: #e5e5e5;
+      text-transform: uppercase;
+      letter-spacing: 12px;
+      margin: 0;
+      text-shadow: 3px 3px 0 rgba(139, 115, 85, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+
+    /* 기존 h2 스타일 상속 방지 */
+    .video-section .video-title h2::after {
+      display: none;
+    }
+
+    .video-section .video-title h2::before {
+      content: 'MISSION BRIEFING';
+      position: absolute;
+      top: -20px;
+      left: 5px;
+      font-size: 0.3em;
+      letter-spacing: 5px;
+      color: var(--military-accent);
+      font-weight: normal;
+      opacity: 0.8;
+      width: auto;
+      height: auto;
+      background: none;
+      transform: none;
+    }
+
+    /* 필름 스프로켓 홀 장식 */
+    .video-section .video-title .film-holes {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+    }
+
+    .video-section .video-title .film-holes.left {
+      left: 10px;
+    }
+
+    .video-section .video-title .film-holes.right {
+      right: 10px;
+    }
+
+    .video-section .video-title .film-holes::before,
+    .video-section .video-title .film-holes::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(26, 26, 26, 0.9);
+      border: 1px solid var(--military-accent);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .video-section .video-title .film-holes::before {
+      top: 10px;
+    }
+
+    .video-section .video-title .film-holes::after {
+      bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .video-section .video-title {
+        padding: 20px 40px;
+        margin-bottom: 40px;
+        width: 80%;
+      }
+
+      .video-section .video-title h2 {
+        font-size: 1.4em;
+        letter-spacing: 3px;
+      }
+
+      .video-section .video-title::after {
+        left: -30px;
+        font-size: 1.2em;
+      }
+
+      .video-section .video-title h2::before {
+        font-size: 0.1em;
+        top: -15px;
+        letter-spacing: 3px;
+      }
+
+      .video-section .video-title .film-holes {
+        width: 15px;
+      }
+
+      .video-section .video-title .film-holes::before,
+      .video-section .video-title .film-holes::after {
+        width: 8px;
+        height: 8px;
+      }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
   </head>
@@ -1322,6 +1855,7 @@
       <li><a href="#video">사용영상</a></li>
       <li><a href="#features">핵심기능</a></li>
       <li><a href="#about">소개</a></li>
+      <li><a href="#patch-notes">패치노트</a></li>
       <li><a href="#pricing">이용안내</a></li>
       <li><a href="#contact">문의하기</a></li>
     </ul>
@@ -1334,7 +1868,11 @@
   
   <section id="video" class="video-section">
     <div class="video-container">
-      <h2>플레이 영상</h2>
+      <div class="video-title">
+        <div class="film-holes left"></div>
+        <div class="film-holes right"></div>
+        <h2>Play Videos</h2>
+      </div>
       <div class="video-slider">
         <button class="prev-btn">Prev</button>
         <div class="video-wrapper">
@@ -1501,6 +2039,52 @@
     </div>
   </section>
   
+  <section id="patch-notes" class="patch-notes">
+    <div class="patch-container">
+      <div class="patch-title">
+        <h2>PATCH NOTES</h2>
+        <div class="title-accent"></div>
+      </div>
+      <div class="patch-timeline">
+        <div class="patch-item">
+          <div class="patch-date">2025.01.20</div>
+          <div class="patch-content">
+            <div class="version-tag">V2.0.0</div>
+            <div class="new-tag">NEW</div>
+            <ul>
+              <li class="highlight">최신 AI 업데이트로 모델 성능 20% 향상</li>
+              <li>타겟팅 알고리즘 정확도 향상</li>
+              <li>아군식별 로직 개선</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="patch-item">
+          <div class="patch-date">2025.01.8</div>
+          <div class="patch-content">
+            <div class="version-tag">V1.7.3</div>
+            <ul>
+              <li class="highlight">실시간 타겟 부위 변경 단축키 추가</li>
+              <li>UI/UX 개선 및 최적화</li>
+              <li>추적 강도 범위 확장</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="patch-item">
+          <div class="patch-date">2024.12.30</div>
+          <div class="patch-content">
+            <div class="version-tag">V1.6.3</div>
+            <ul>
+              <li>단축키 설정 UI 업데이트</li>
+              <li>메모리 사용량 개선</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
   <section id="pricing" class="pricing-section">
     <div class="pricing-container">
       <h2>이용 안내</h2>
@@ -1532,14 +2116,14 @@
             <div class="price-item">
               <span class="duration">7일 이용권</span>
               <span class="price">
-                <span class="original-price">90,000원</span>
+                <span class="original-price">70,000원</span>
                 50,000원
               </span>
             </div>
             <div class="price-item">
               <span class="duration">30일 이용권</span>
               <span class="price">
-                <span class="original-price">250,000원</span>
+                <span class="original-price">220,000원</span>
                 150,000원
               </span>
             </div>
@@ -1553,7 +2137,7 @@
   <section id="contact" class="contact">
     <div class="contact-container">
       <h2>문의하기</h2>
-      <p class="contact-desc">아래 연락처로 문의해 주시면 신속하게 답변드리겠습니다</p>
+      <p class="contact-desc"></p>
       
       <div class="contact-methods">
         <div class="contact-item">
@@ -1596,8 +2180,17 @@
   </section>
   
   <script>
+  let crosshairInitialized = false;
+
   document.addEventListener('mousemove', (e) => {
     const crosshair = document.querySelector('.crosshair');
+
+    // 한 번만 초기화
+    if (!crosshairInitialized) {
+      crosshair.style.display = 'block';
+      crosshairInitialized = true;
+    }
+
     crosshair.style.left = (e.clientX - 15) + 'px';
     crosshair.style.top = (e.clientY - 15) + 'px';
   });
