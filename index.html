@@ -2149,11 +2149,11 @@
             <div class="contact-info" style="display: flex; flex-direction: column;">
               <h3>카카오톡</h3>
               <p id="kakaoId">autogen</p>
-              <p style="color: var(--military-red); font-size: 0.8em; margin-top: auto;">* 카카오톡 ID 검색 후 1:1 채팅</p>
+              <p style="color: var(--military-red); font-size: 0.8em; margin-top: auto;">* 카카오톡 ID 추가 또는 하단 오픈 채팅 연결</p>
             </div>
           </div>
-          <a href="#" onclick="copyKakaoId(event)" class="contact-button">
-            카카오톡 ID 복사
+          <a href="https://open.kakao.com/o/sWxAbCeh" target="_blank" class="contact-button">
+            오프채팅 연결
             <span class="button-arrow">→</span>
           </a>
         </div>
@@ -2492,17 +2492,17 @@ document.querySelectorAll('.nav a').forEach(link => {
   });
 });
 
-function copyKakaoId(event) {
-    event.preventDefault();
-    const kakaoId = document.getElementById('kakaoId').textContent;
-    navigator.clipboard.writeText(kakaoId)
-        .then(() => {
-            alert('카카오톡 ID가 복사되었습니다.');
-        })
-        .catch(err => {
-            alert('ID 복사에 실패했습니다. 직접 ID를 복사해주세요.');
-        });
-}
+// function copyKakaoId(event) {
+//     event.preventDefault();
+//     const kakaoId = document.getElementById('kakaoId').textContent;
+//     navigator.clipboard.writeText(kakaoId)
+//         .then(() => {
+//             alert('카카오톡 ID가 복사되었습니다.');
+//         })
+//         .catch(err => {
+//             alert('ID 복사에 실패했습니다. 직접 ID를 복사해주세요.');
+//         });
+// }
   </script>
   
   </body></html>
